@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BAPI Sample Website – Bangladesh Association of Pharmaceutical Industries (BAPI)</title>
+<meta name="robots" content="noindex, nofollow" />
+<meta name="description" content="Sample redesign concept for the Bangladesh Association of Pharmaceutical Industries (BAPI). This is NOT the official BAPI website." />
+<link rel="icon" href="https://saizul.com/bapi-sample-website/wp-content/uploads/2026/09/BAPI-logo.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ============ GLOBAL RESET ============ -->
+<style>
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:#070b09;}
+</style>
+
+<!-- ============ HEADER STYLES ============ -->
+<style>
+  .bapi-hdr-redesign{
+    --hdr-bg:#070b09;
+    --hdr-surface:rgba(9,15,12,.88);
+    --hdr-border:rgba(255,255,255,.1);
+    --hdr-green:#28d16d;
+    --hdr-green-dim:#1a9750;
+    --hdr-gold:#f9cf3b;
+    --hdr-text:#f2f6f3;
+    --hdr-muted:#a9bab1;
+    --font-head:'Space Grotesk',sans-serif;
+    --font-body:'Inter',sans-serif;
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:1000;
+    font-family:var(--font-body);
+    color:var(--hdr-text);
+  }
+  .bapi-hdr-redesign *{box-sizing:border-box;}
+  .bapi-hdr-redesign a{color:inherit;text-decoration:none;}
+  .bapi-hdr-redesign ul{list-style:none;margin:0;padding:0;}
+  .bapi-hdr-container{max-width:1320px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- NOTICE BAR ---------- */
+  .bapi-hdr-notice{
+    background:#fbbf24;color:#7f1d1d;font-size:13px;font-weight:600;line-height:1.5;
+    padding:10px 20px;text-align:center;
+  }
+  .bapi-hdr-notice b{color:#7f1d1d;font-weight:800;}
+  .bapi-hdr-notice a{color:#7f1d1d;text-decoration:underline;text-underline-offset:2px;font-weight:800;}
+  .bapi-hdr-notice a:hover{color:#450a0a;}
+
+  /* ---------- NAV ---------- */
+  .bapi-hdr-nav-wrap{
+    position:relative;z-index:10;
+    background:var(--hdr-surface);backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--hdr-border);
+  }
+  .bapi-hdr-nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0;}
+
+  .bapi-hdr-brand{display:flex;align-items:center;gap:11px;flex-shrink:0;}
+  .bapi-hdr-logo{width:80px;max-width:120px;object-fit:contain;flex-shrink:0;border-radius:4px;display:block;}
+  .bapi-hdr-flag{width:26px;height:16px;border-radius:3px;overflow:hidden;flex-shrink:0;box-shadow:0 0 0 1px rgba(255,255,255,.14);}
+  .bapi-hdr-brand-text{display:flex;flex-direction:column;line-height:1.15;}
+  .bapi-hdr-brand-name{font-family:var(--font-head);font-weight:700;font-size:18px;letter-spacing:.01em;}
+  .bapi-hdr-brand-sub{font-size:10.5px;color:var(--hdr-muted);letter-spacing:.03em;white-space:nowrap;}
+
+  .bapi-hdr-links{display:flex;align-items:center;gap:6px;}
+  .bapi-hdr-link{
+    position:relative;padding:9px 15px;border-radius:100px;font-size:14px;font-weight:500;
+    color:var(--hdr-muted);transition:color .25s,background .25s;white-space:nowrap;
+  }
+  .bapi-hdr-link:hover{color:var(--hdr-text);background:rgba(255,255,255,.06);}
+  .bapi-hdr-link.active{color:var(--hdr-text);background:rgba(40,209,109,.14);}
+  .bapi-hdr-link.active::after{
+    content:'';position:absolute;left:15px;right:15px;bottom:3px;height:2px;border-radius:2px;
+    background:linear-gradient(90deg,var(--hdr-green),var(--hdr-gold));
+  }
+  .bapi-hdr-link-cta{
+    background:linear-gradient(135deg,var(--hdr-green),var(--hdr-green-dim));color:#04150b!important;
+    font-weight:700;box-shadow:0 6px 20px -6px rgba(40,209,109,.4);margin-left:6px;
+  }
+  .bapi-hdr-link-cta:hover{background:linear-gradient(135deg,var(--hdr-green),var(--hdr-green-dim));transform:translateY(-2px);}
+  .bapi-hdr-link-cta.active::after{display:none;}
+
+  /* ---------- MOBILE TOGGLE ---------- */
+  .bapi-hdr-toggle{
+    display:none;width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.06);
+    border:1px solid var(--hdr-border);align-items:center;justify-content:center;flex-shrink:0;
+    color:var(--hdr-text);cursor:pointer;
+  }
+  .bapi-hdr-toggle svg{display:block;}
+  .bapi-hdr-toggle .bapi-hdr-icon-close{display:none;}
+  .bapi-hdr-nav-wrap.open .bapi-hdr-icon-menu{display:none;}
+  .bapi-hdr-nav-wrap.open .bapi-hdr-icon-close{display:block;}
+
+  @media (max-width:900px){
+    .bapi-hdr-links{
+      position:fixed;top:0;right:0;bottom:0;width:min(320px,84vw);
+      background:#0a120e;border-left:1px solid var(--hdr-border);
+      flex-direction:column;align-items:stretch;gap:4px;padding:88px 18px 28px;
+      transform:translateX(100%);transition:transform .38s cubic-bezier(.2,.8,.2,1);
+      overflow-y:auto;
+    }
+    .bapi-hdr-nav-wrap.open .bapi-hdr-links{transform:translateX(0);}
+    .bapi-hdr-link{padding:14px 16px;font-size:15.5px;}
+    .bapi-hdr-link-cta{margin-left:0;margin-top:8px;text-align:center;}
+    .bapi-hdr-toggle{display:flex;}
+    .bapi-hdr-scrim{
+      display:none;position:fixed;inset:0;background:rgba(3,6,4,.6);z-index:9;
+    }
+    .bapi-hdr-nav-wrap.open .bapi-hdr-scrim{display:block;}
+  }
+  @media (max-width:480px){
+    .bapi-hdr-brand-sub{display:none;}
+    .bapi-hdr-container{padding:0 18px;}
+    .bapi-hdr-notice{font-size:12px;padding:9px 14px;}
+  }
+</style>
+
+<!-- ============ HOME PAGE STYLES ============ -->
+<style>
+  .bapi-redesign{
+    --bapi-bg:#070b09;
+    --bapi-bg-alt:#0b1410;
+    --bapi-surface:rgba(12,20,16,.62);
+    --bapi-surface-hi:rgba(16,28,22,.8);
+    --bapi-border:rgba(255,255,255,.1);
+    --bapi-green:#28d16d;
+    --bapi-green-dim:#1a9750;
+    --bapi-green-glow:rgba(40,209,109,.35);
+    --bapi-gold:#f9cf3b;
+    --bapi-gold-glow:rgba(249,207,59,.35);
+    --bapi-cyan:#38d9e0;
+    --bapi-text:#f2f6f3;
+    --bapi-muted:#a9bab1;
+    --bapi-muted-2:#7c8d84;
+    --bapi-radius:22px;
+    --bapi-radius-sm:14px;
+    --font-head:'Space Grotesk',sans-serif;
+    --font-body:'Inter',sans-serif;
+    background:var(--bapi-bg);
+    color:var(--bapi-text);
+    font-family:var(--font-body);
+    position:relative;
+    overflow-x:clip;
+    line-height:1.5;
+    isolation:isolate;
+  }
+  .bapi-redesign *{box-sizing:border-box;}
+  .bapi-redesign img{max-width:100%;display:block;}
+  .bapi-redesign a{color:inherit;text-decoration:none;}
+  .bapi-redesign ul{list-style:none;margin:0;padding:0;}
+  .bapi-redesign h1,.bapi-redesign h2,.bapi-redesign h3,.bapi-redesign h4{
+    font-family:var(--font-head);font-weight:600;margin:0;letter-spacing:-.01em;
+  }
+  .bapi-redesign p{margin:0;}
+  .bapi-redesign button{font-family:var(--font-body);cursor:pointer;}
+  .bapi-redesign .bapi-container{max-width:1240px;margin:0 auto;padding:0 28px;}
+  .bapi-redesign section{position:relative;z-index:2;perspective:1400px;}
+
+  /* ---------- PERSISTENT 3D BACKGROUND (fixed, behind everything) ---------- */
+  .bapi-bg-fixed{position:fixed;inset:0;z-index:0;overflow:hidden;}
+  .bapi-bg-fixed canvas{width:100%!important;height:100%!important;display:block;}
+  .bapi-scrim{
+    position:fixed;inset:0;z-index:1;pointer-events:none;
+    background:
+      radial-gradient(70% 60% at 22% 30%, rgba(5,9,7,.5), rgba(5,9,7,0) 68%),
+      linear-gradient(180deg, rgba(7,11,9,.28) 0%, rgba(7,11,9,.36) 45%, rgba(7,11,9,.48) 100%);
+  }
+  .bapi-hero h1,.bapi-hero-sub,.bapi-h2,.bapi-kicker,.bapi-eyebrow{ text-shadow:0 2px 24px rgba(3,6,4,.7); }
+  .bapi-grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.035;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .bapi-eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;
+    color:var(--bapi-green);background:rgba(40,209,109,.1);border:1px solid rgba(40,209,109,.32);
+    padding:7px 16px 7px 12px;border-radius:100px;letter-spacing:.02em;
+  }
+  .bapi-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--bapi-green);box-shadow:0 0 8px var(--bapi-green);}
+  .bapi-eyebrow .bapi-flag{width:18px;height:11px;border-radius:2px;overflow:hidden;flex-shrink:0;}
+
+  .bapi-btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:15px 28px;border-radius:100px;font-weight:600;font-size:15px;border:1px solid transparent;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,background .35s,border-color .35s;
+    white-space:nowrap;
+  }
+  .bapi-btn-primary{background:linear-gradient(135deg,var(--bapi-green),var(--bapi-green-dim));color:#04150b;box-shadow:0 8px 30px -6px var(--bapi-green-glow);}
+  .bapi-btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 36px -6px var(--bapi-green-glow);}
+  .bapi-btn-ghost{background:rgba(255,255,255,.06);border-color:var(--bapi-border);color:var(--bapi-text);backdrop-filter:blur(10px);}
+  .bapi-btn-ghost:hover{background:rgba(255,255,255,.12);transform:translateY(-3px);border-color:rgba(255,255,255,.25);}
+
+  /* ---------- HERO ---------- */
+  .bapi-hero{min-height:92svh;display:flex;align-items:center;padding:70px 0 90px;}
+  .bapi-hero-inner{max-width:1040px;}
+  .bapi-hero h1{font-size:clamp(40px,7vw,92px);line-height:1.02;margin:22px 0 22px;perspective:1000px;}
+  .bapi-hero h1 .accent{background:linear-gradient(100deg,var(--bapi-green),var(--bapi-gold));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .bapi-word{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em;margin-bottom:-.12em;}
+  .bapi-word-in{display:inline-block;will-change:transform,opacity;}
+  .bapi-hero-sub{font-size:17.5px;color:var(--bapi-muted);max-width:560px;margin-bottom:36px;line-height:1.65;}
+  .bapi-hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:52px;}
+  .bapi-hero-meta{display:flex;gap:34px;flex-wrap:wrap;}
+  .bapi-hero-meta div b{display:block;font-family:var(--font-head);font-size:26px;}
+  .bapi-hero-meta div span{font-size:12.5px;color:var(--bapi-muted-2);text-transform:uppercase;letter-spacing:.04em;}
+  .bapi-scrolldown{position:absolute;bottom:26px;left:28px;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--bapi-muted-2);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;}
+  .bapi-scrolldown .line{width:1px;height:34px;background:linear-gradient(var(--bapi-green),transparent);animation:bapiScroll 1.8s ease-in-out infinite;}
+  @keyframes bapiScroll{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}50.01%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+  .bapi-kicker{color:var(--bapi-green);font-weight:600;font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;display:block;}
+  .bapi-h2{font-size:clamp(28px,3.4vw,44px);line-height:1.1;max-width:640px;}
+  .bapi-section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:56px;flex-wrap:wrap;}
+  .bapi-section-desc{color:var(--bapi-muted);max-width:360px;font-size:15px;line-height:1.7;}
+
+  /* ---------- STATS ---------- */
+  .bapi-stats{padding:40px 0 120px;}
+  .bapi-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .bapi-stat-card{background:var(--bapi-surface);border:1px solid var(--bapi-border);border-radius:var(--bapi-radius);padding:32px 26px;text-align:left;backdrop-filter:blur(14px);transition:transform .4s,border-color .4s,background .4s;}
+  .bapi-stat-card:hover{transform:translateY(-6px);border-color:rgba(40,209,109,.4);background:var(--bapi-surface-hi);}
+  .bapi-stat-num{font-family:var(--font-head);font-size:clamp(32px,3.4vw,46px);font-weight:700;background:linear-gradient(120deg,#fff,var(--bapi-green) 90%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .bapi-stat-label{color:var(--bapi-muted);font-size:14px;margin-top:8px;}
+
+  /* ---------- ABOUT / PHOTO / TIMELINE ---------- */
+  .bapi-about{padding:60px 0 130px;}
+  .bapi-about-grid{display:grid;grid-template-columns:.85fr .95fr 1.05fr;gap:26px;align-items:start;}
+  .bapi-photo{position:relative;border-radius:var(--bapi-radius);overflow:hidden;aspect-ratio:3/4;border:1px solid var(--bapi-border);}
+  .bapi-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.12) brightness(.7);transition:transform .6s ease;}
+  .bapi-photo:hover img{transform:scale(1.06);}
+  .bapi-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(165deg,rgba(40,209,109,.6),rgba(7,11,9,.85));mix-blend-mode:multiply;}
+  .bapi-photo::before{content:'';position:absolute;left:16px;bottom:16px;right:16px;z-index:2;height:1px;}
+  .bapi-photo-cap{position:absolute;left:18px;bottom:16px;right:18px;z-index:2;font-size:12.5px;color:rgba(255,255,255,.85);font-weight:500;letter-spacing:.01em;}
+  .bapi-about-card{background:var(--bapi-surface);border:1px solid var(--bapi-border);border-radius:var(--bapi-radius);padding:32px;backdrop-filter:blur(14px);}
+  .bapi-about-card p{color:var(--bapi-muted);font-size:15px;line-height:1.8;margin-top:16px;}
+  .bapi-timeline{display:flex;flex-direction:column;}
+  .bapi-timeline-item{display:grid;grid-template-columns:80px 20px 1fr;padding-bottom:34px;}
+  .bapi-timeline-item:last-child{padding-bottom:0;}
+  .bapi-timeline-year{font-family:var(--font-head);font-weight:700;font-size:15.5px;color:var(--bapi-gold);}
+  .bapi-timeline-dot-col{display:flex;flex-direction:column;align-items:center;}
+  .bapi-timeline-dot{width:11px;height:11px;border-radius:50%;background:var(--bapi-green);box-shadow:0 0 0 4px rgba(40,209,109,.18);flex-shrink:0;margin-top:4px;}
+  .bapi-timeline-line{flex:1;width:1px;background:linear-gradient(var(--bapi-border),transparent);margin-top:6px;}
+  .bapi-timeline-item:last-child .bapi-timeline-line{display:none;}
+  .bapi-timeline-body h4{font-size:15.5px;margin-bottom:6px;}
+  .bapi-timeline-body p{color:var(--bapi-muted);font-size:13.8px;line-height:1.6;}
+
+  /* ---------- GLOBAL FOOTPRINT ---------- */
+  .bapi-globe{padding:100px 0 140px;min-height:70vh;display:flex;align-items:center;}
+  .bapi-globe-inner{max-width:620px;}
+  .bapi-globe-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:34px;max-width:480px;}
+  .bapi-globe-stats .bapi-stat-card{padding:22px 20px;}
+  .bapi-globe-stats .bapi-stat-num{font-size:26px;}
+
+  /* ---------- COMPETITIVE EDGE ---------- */
+  .bapi-edge{padding:60px 0 60px;}
+  .bapi-edge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .bapi-edge-card{background:var(--bapi-surface);border:1px solid var(--bapi-border);border-radius:var(--bapi-radius);padding:30px;position:relative;overflow:hidden;backdrop-filter:blur(14px);}
+  .bapi-edge-icon{width:48px;height:48px;border-radius:14px;background:rgba(40,209,109,.14);border:1px solid rgba(40,209,109,.28);display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:var(--bapi-green);}
+  .bapi-edge-card h4{font-size:17px;margin-bottom:10px;}
+  .bapi-edge-card p{color:var(--bapi-muted);font-size:14.5px;line-height:1.65;}
+
+  /* ---------- MANUFACTURING PHOTO BANNER ---------- */
+  .bapi-mfg{padding:70px 0;}
+  .bapi-mfg-banner{position:relative;border-radius:32px;overflow:hidden;border:1px solid var(--bapi-border);min-height:340px;display:flex;align-items:flex-end;}
+  .bapi-mfg-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15) brightness(.55);}
+  .bapi-mfg-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,11,9,.92) 10%,rgba(7,11,9,.35) 65%,rgba(40,209,109,.35));}
+  .bapi-mfg-content{position:relative;z-index:2;padding:46px;max-width:560px;}
+  .bapi-mfg-content h3{font-size:clamp(22px,2.6vw,32px);margin-bottom:14px;}
+  .bapi-mfg-content p{color:var(--bapi-muted);font-size:15px;line-height:1.7;}
+  .bapi-mfg-badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;}
+  .bapi-mfg-badge{font-size:12px;font-weight:600;letter-spacing:.03em;padding:7px 14px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid var(--bapi-border);}
+
+  /* ---------- API PARK ---------- */
+  .bapi-park{padding:20px 0 130px;}
+  .bapi-park-panel{background:linear-gradient(135deg,rgba(40,209,109,.14),rgba(249,207,59,.07));border:1px solid var(--bapi-border);border-radius:32px;padding:60px;position:relative;overflow:hidden;backdrop-filter:blur(10px);}
+  .bapi-park-top{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start;margin-bottom:44px;position:relative;}
+  .bapi-park-top p{color:var(--bapi-muted);max-width:420px;font-size:15px;line-height:1.7;margin-top:16px;}
+  .bapi-park-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative;}
+  .bapi-park-grid .bapi-stat-card{background:rgba(7,11,9,.6);}
+
+  /* ---------- NEWS ---------- */
+  .bapi-news{padding:60px 0 130px;}
+  .bapi-news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .bapi-news-card{background:var(--bapi-surface);border:1px solid var(--bapi-border);border-radius:var(--bapi-radius);overflow:hidden;transition:transform .4s,border-color .4s;display:flex;flex-direction:column;backdrop-filter:blur(14px);}
+  .bapi-news-card:hover{transform:translateY(-6px);border-color:rgba(40,209,109,.32);}
+  .bapi-news-thumb{height:170px;background:linear-gradient(135deg,#0f2417,#132a1c);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .bapi-news-thumb svg{width:46px;height:46px;color:var(--bapi-green);opacity:.55;}
+  .bapi-news-date{position:absolute;top:14px;left:14px;background:rgba(7,11,9,.8);border:1px solid var(--bapi-border);padding:5px 12px;border-radius:100px;font-size:11.5px;font-weight:600;letter-spacing:.04em;color:var(--bapi-gold);}
+  .bapi-news-body{padding:24px;flex:1;display:flex;flex-direction:column;}
+  .bapi-news-body h4{font-size:16.5px;line-height:1.4;margin-bottom:10px;}
+  .bapi-news-body p{color:var(--bapi-muted);font-size:14px;line-height:1.65;flex:1;}
+  .bapi-news-link{margin-top:16px;font-size:13.5px;font-weight:600;color:var(--bapi-green);display:inline-flex;align-items:center;gap:6px;}
+
+  /* ---------- MARQUEE ---------- */
+  .bapi-marquee-wrap{padding:50px 0;border-top:1px solid var(--bapi-border);border-bottom:1px solid var(--bapi-border);overflow:hidden;background:rgba(7,11,9,.4);}
+  .bapi-marquee-label{text-align:center;color:var(--bapi-muted-2);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:26px;}
+  .bapi-marquee{display:flex;width:max-content;animation:bapiMarquee 32s linear infinite;}
+  .bapi-marquee:hover{animation-play-state:paused;}
+  .bapi-marquee-item{display:flex;align-items:center;gap:10px;padding:12px 36px;color:var(--bapi-muted);font-family:var(--font-head);font-weight:600;font-size:16px;white-space:nowrap;opacity:.75;}
+  .bapi-marquee-item .bapi-dot-sep{width:5px;height:5px;border-radius:50%;background:var(--bapi-green);}
+  @keyframes bapiMarquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ---------- CTA BAND ---------- */
+  .bapi-cta{padding:100px 0 140px;}
+  .bapi-cta-panel{text-align:center;padding:80px 40px;border-radius:32px;position:relative;overflow:hidden;background:rgba(11,20,16,.7);border:1px solid var(--bapi-border);backdrop-filter:blur(14px);}
+  .bapi-cta-panel h2{font-size:clamp(28px,4vw,46px);max-width:680px;margin:0 auto 18px;}
+  .bapi-cta-panel p{color:var(--bapi-muted);max-width:480px;margin:0 auto 34px;font-size:15.5px;}
+  .bapi-cta-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+
+  .bapi-reveal{opacity:0;transform:translateY(28px) rotateX(10deg);transform-origin:50% 100%;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:980px){
+    .bapi-about-grid{grid-template-columns:1fr;gap:26px;}
+    .bapi-photo{aspect-ratio:16/9;}
+    .bapi-stats-grid{grid-template-columns:repeat(2,1fr);}
+    .bapi-edge-grid{grid-template-columns:repeat(2,1fr);}
+    .bapi-news-grid{grid-template-columns:1fr;}
+    .bapi-park-grid{grid-template-columns:repeat(2,1fr);}
+    .bapi-mfg-content{max-width:100%;}
+  }
+  @media (max-width:600px){
+    .bapi-container{padding:0 18px;}
+    .bapi-stats-grid{grid-template-columns:1fr 1fr;}
+    .bapi-edge-grid{grid-template-columns:1fr;}
+    .bapi-park-grid{grid-template-columns:1fr 1fr;}
+    .bapi-park-panel{padding:36px 24px;}
+    .bapi-hero-meta{gap:22px;}
+    .bapi-cta-panel{padding:56px 24px;}
+    .bapi-mfg-content{padding:30px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .bapi-redesign *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;}
+  }
+</style>
+
+<!-- ============ FOOTER STYLES ============ -->
+<style>
+  .bapi-ftr-redesign{
+    --ftr-bg:#070b09;
+    --ftr-surface:rgba(12,20,16,.7);
+    --ftr-border:rgba(255,255,255,.09);
+    --ftr-green:#28d16d;
+    --ftr-green-dim:#1a9750;
+    --ftr-gold:#f9cf3b;
+    --ftr-text:#f2f6f3;
+    --ftr-muted:#a9bab1;
+    --font-head:'Space Grotesk',sans-serif;
+    --font-body:'Inter',sans-serif;
+    position:relative;
+    background:var(--ftr-bg);
+    color:var(--ftr-muted);
+    font-family:var(--font-body);
+    border-top:1px solid var(--ftr-border);
+    overflow:hidden;
+  }
+  .bapi-ftr-redesign *{box-sizing:border-box;}
+  .bapi-ftr-redesign a{color:inherit;text-decoration:none;}
+  .bapi-ftr-redesign ul{list-style:none;margin:0;padding:0;}
+  .bapi-ftr-container{max-width:1320px;margin:0 auto;padding:0 28px;position:relative;z-index:2;}
+
+  .bapi-ftr-glow{
+    position:absolute;left:50%;top:-120px;width:640px;height:320px;
+    transform:translateX(-50%);
+    background:radial-gradient(ellipse at center, rgba(40,209,109,.16), transparent 70%);
+    filter:blur(10px);pointer-events:none;z-index:1;
+  }
+
+  .bapi-ftr-main{padding:64px 0 40px;}
+  .bapi-ftr-grid{
+    display:grid;grid-template-columns:1.3fr 1fr 1.2fr 1fr;gap:40px;
+  }
+
+  .bapi-ftr-brand-row{display:flex;align-items:center;gap:11px;margin-bottom:16px;}
+  .bapi-ftr-logo{width:80px;max-width:130px;object-fit:contain;flex-shrink:0;border-radius:4px;display:block;}
+  .bapi-ftr-flag{width:28px;height:17px;border-radius:3px;overflow:hidden;flex-shrink:0;box-shadow:0 0 0 1px rgba(255,255,255,.14);}
+  .bapi-ftr-brand-name{font-family:var(--font-head);font-weight:700;font-size:19px;color:var(--ftr-text);}
+  .bapi-ftr-desc{font-size:13.5px;line-height:1.7;max-width:320px;margin:0 0 20px;}
+  .bapi-ftr-desc b{color:var(--ftr-text);font-weight:600;}
+
+  .bapi-ftr-social-row{display:flex;gap:10px;}
+  .bapi-ftr-social{
+    width:38px;height:38px;border-radius:10px;background:var(--ftr-surface);
+    border:1px solid var(--ftr-border);display:flex;align-items:center;justify-content:center;
+    transition:background .25s,transform .25s,border-color .25s;
+  }
+  .bapi-ftr-social:hover{background:rgba(40,209,109,.14);border-color:rgba(40,209,109,.4);transform:translateY(-2px);color:var(--ftr-green);}
+  .bapi-ftr-social svg{width:16px;height:16px;display:block;}
+
+  .bapi-ftr-heading{
+    font-family:var(--font-head);font-weight:700;font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ftr-text);margin:0 0 18px;
+  }
+
+  .bapi-ftr-links li{margin-bottom:12px;}
+  .bapi-ftr-links a{
+    font-size:14px;display:inline-flex;align-items:center;gap:8px;transition:color .2s,gap .2s;
+  }
+  .bapi-ftr-links a::before{
+    content:'';width:5px;height:5px;border-radius:50%;background:var(--ftr-green-dim);flex-shrink:0;
+    transition:background .2s;
+  }
+  .bapi-ftr-links a:hover{color:var(--ftr-text);gap:11px;}
+  .bapi-ftr-links a:hover::before{background:var(--ftr-gold);}
+
+  .bapi-ftr-contact li{
+    display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.6;margin-bottom:16px;
+  }
+  .bapi-ftr-contact svg{width:16px;height:16px;flex-shrink:0;margin-top:2px;color:var(--ftr-green);}
+  .bapi-ftr-contact a:hover{color:var(--ftr-text);}
+
+  .bapi-ftr-notice{
+    margin-top:6px;padding:12px 14px;border-radius:10px;
+    background:rgba(249,207,59,.07);border:1px solid rgba(249,207,59,.22);
+    font-size:12px;line-height:1.6;color:#e8d48a;
+  }
+  .bapi-ftr-notice b{color:#f9cf3b;}
+
+  .bapi-ftr-bottom{
+    border-top:1px solid var(--ftr-border);
+    padding:22px 0;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    font-size:13px;
+  }
+  .bapi-ftr-copy{color:var(--ftr-muted);}
+  .bapi-ftr-credit{color:var(--ftr-muted);}
+  .bapi-ftr-credit a{
+    color:var(--ftr-green);font-weight:600;transition:color .2s;
+  }
+  .bapi-ftr-credit a:hover{color:var(--ftr-gold);text-decoration:underline;text-underline-offset:3px;}
+
+  @media (max-width:900px){
+    .bapi-ftr-grid{grid-template-columns:1fr 1fr;row-gap:36px;}
+  }
+  @media (max-width:560px){
+    .bapi-ftr-container{padding:0 18px;}
+    .bapi-ftr-main{padding:48px 0 28px;}
+    .bapi-ftr-grid{grid-template-columns:1fr;row-gap:32px;}
+    .bapi-ftr-bottom{flex-direction:column;align-items:flex-start;gap:8px;padding:18px 0;}
+    .bapi-ftr-desc{max-width:none;}
+  }
+</style>
+</head>
+
+<body>
+<a class="bapi-skip" href="#bapi-home" style="position:absolute;left:-9999px;">Skip to main content</a>
+
+<!-- ============================================================
+  SITE HEADER (fixed): notice bar + navigation
+============================================================= -->
+<header class="bapi-hdr-redesign" id="bapi-site-header">
+
+<div class="bapi-hdr-notice">
+  <b>N.B.</b> This is NOT the official BAPI website - it is a sample design concept only. Interested in this design? Contact <a href="mailto:saizulamin@gmail.com">saizulamin@gmail.com</a>.
+</div>
+
+<div class="bapi-hdr-nav-wrap" id="bapiHdrNavWrap">
+  <div class="bapi-hdr-container">
+    <nav class="bapi-hdr-nav">
+      <a href="https://saizul.com/bapi-sample-website/" class="bapi-hdr-brand" data-hdr-home="1">
+        <img class="bapi-hdr-logo" id="bapiHdrLogo" src="https://saizul.com/bapi-sample-website/wp-content/uploads/2026/09/BAPI-logo.jpg" alt="BAPI logo">
+        <svg class="bapi-hdr-flag" id="bapiHdrFlagFallback" style="display:none" viewBox="0 0 30 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="30" height="18" fill="#006a4e"/>
+          <circle cx="13.5" cy="9" r="6" fill="#f42a41"/>
+        </svg>
+        <span class="bapi-hdr-brand-text">
+          <span class="bapi-hdr-brand-name">BAPI</span>
+          <span class="bapi-hdr-brand-sub">Bangladesh Assoc. of Pharma Industries</span>
+        </span>
+      </a>
+
+      <ul class="bapi-hdr-links" id="bapiHdrLinks">
+        <li><a class="bapi-hdr-link" href="https://saizul.com/bapi-sample-website/">Home</a></li>
+        <li><a class="bapi-hdr-link" href="https://saizul.com/bapi-sample-website/about-us/">About Us</a></li>
+        <li><a class="bapi-hdr-link" href="https://saizul.com/bapi-sample-website/bangladesh-pharma-industry/">Bangladesh Pharma Industry</a></li>
+        <li><a class="bapi-hdr-link" href="https://saizul.com/bapi-sample-website/bapi-leadership-governance/">Leadership &amp; Governance</a></li>
+        <li><a class="bapi-hdr-link" href="https://saizul.com/bapi-sample-website/members-directory/">Members Directory</a></li>
+        <li><a class="bapi-hdr-link bapi-hdr-link-cta" href="https://saizul.com/bapi-sample-website/contact/">Contact</a></li>
+      </ul>
+
+      <button type="button" class="bapi-hdr-toggle" id="bapiHdrToggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg class="bapi-hdr-icon-menu" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="bapi-hdr-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </nav>
+  </div>
+  <div class="bapi-hdr-scrim" id="bapiHdrScrim"></div>
+</div>
+
+</header>
+
+<!-- ============================================================
+  HOME PAGE CONTENT
+============================================================= -->
+<main>
+<div class="bapi-redesign" id="bapi-home">
+
+<!-- fixed full-page 3D background + readability scrim -->
+<div class="bapi-bg-fixed"><canvas id="bapiBgCanvas"></canvas></div>
+<div class="bapi-scrim"></div>
+<div class="bapi-grain"></div>
+
+<!-- ============ HERO ============ -->
+<section class="bapi-hero" id="bapi-hero">
+  <div class="bapi-container">
+    <div class="bapi-hero-inner">
+      <span class="bapi-eyebrow">
+        <svg class="bapi-flag" viewBox="0 0 30 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="30" height="18" fill="#006a4e"/>
+          <circle cx="13.5" cy="9" r="6" fill="#f42a41"/>
+        </svg>
+        Est. 1972 · Apex Pharma Trade Body of Bangladesh
+      </span>
+      <h1><span class="bapi-word"><span class="bapi-word-in">Powering</span></span> <span class="bapi-word"><span class="bapi-word-in accent">Bangladesh's</span></span> <span class="bapi-word"><span class="bapi-word-in">Pharmaceutical</span></span> <span class="bapi-word"><span class="bapi-word-in">Future</span></span></h1>
+      <p class="bapi-hero-sub">The Bangladesh Association of Pharmaceutical Industries represents the manufacturers driving one of Asia's fastest-growing generic drug hubs — supplying 98% of local demand and exporting quality medicine to 150+ countries.</p>
+      <div class="bapi-hero-actions">
+        <a href="#bapi-globe" class="bapi-btn bapi-btn-primary">Explore the Industry</a>
+        <a href="#bapi-park" class="bapi-btn bapi-btn-ghost">Discover API Park</a>
+      </div>
+      <div class="bapi-hero-meta">
+        <div><b>150+</b><span>Export Countries</span></div>
+        <div><b>98%</b><span>Local Demand Met</span></div>
+        <div><b>$169M+</b><span>Annual Exports</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="bapi-scrolldown"><span>Scroll</span><span class="line"></span></div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="bapi-stats" id="bapi-stats">
+  <div class="bapi-container">
+    <div class="bapi-stats-grid">
+      <div class="bapi-stat-card bapi-reveal"><div class="bapi-stat-num" data-count="150" data-suffix="+">0</div><div class="bapi-stat-label">Countries Served Worldwide</div></div>
+      <div class="bapi-stat-card bapi-reveal"><div class="bapi-stat-num" data-count="98" data-suffix="%">0</div><div class="bapi-stat-label">Of Local Medicine Demand Met</div></div>
+      <div class="bapi-stat-card bapi-reveal"><div class="bapi-stat-num" data-count="169" data-prefix="$" data-suffix="M+">0</div><div class="bapi-stat-label">Annual Export Earnings</div></div>
+      <div class="bapi-stat-card bapi-reveal"><div class="bapi-stat-num" data-count="1972" data-nosep="1">0</div><div class="bapi-stat-label">Founded — 50+ Years Strong</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT / PHOTO / TIMELINE ============ -->
+<section class="bapi-about" id="bapi-about">
+  <div class="bapi-container">
+    <div class="bapi-section-head bapi-reveal">
+      <div><span class="bapi-kicker">Who We Are</span><h2 class="bapi-h2">The apex body uniting Bangladesh's pharmaceutical manufacturers</h2></div>
+      <p class="bapi-section-desc">Since 1972, BAPI has worked closely with regulators and industry to promote GMP standards, export growth, and access to affordable medicine.</p>
+    </div>
+    <div class="bapi-about-grid">
+      <!-- PHOTO 1 — Wikimedia Commons, NHGRI (National Human Genome Research Institute / NIH) official photography — public domain (U.S. federal government work). Swap the src to use your own image if you prefer. -->
+      <div class="bapi-photo bapi-reveal">
+        <img decoding="async" id="bapiPhoto1Img" src="https://commons.wikimedia.org/wiki/Special:FilePath/NHGRI_researcher_uses_a_pipette_to_remove_DNA_from_a_micro_test_tube.jpg" alt="Pharmaceutical research laboratory" loading="lazy">
+        <span class="bapi-photo-cap">Research &amp; quality control</span>
+      </div>
+      <div class="bapi-about-card bapi-reveal">
+        <span class="bapi-kicker" style="margin-bottom:0;">Our Role</span>
+        <p>BAPI represents the pharmaceutical manufacturers of Bangladesh, working hand-in-hand with the Directorate General of Drug Administration and international bodies to uphold Good Manufacturing Practice, expand export access, and champion the industry's global reputation for quality, affordable generics.</p>
+        <p>From insulin and hormones to anti-cancer therapies, member companies now produce nearly every major drug category — a journey from import dependency to becoming one of Asia's leading exporters of quality medicine.</p>
+      </div>
+      <div class="bapi-timeline bapi-reveal">
+        <div class="bapi-timeline-item">
+          <div class="bapi-timeline-year">1972</div>
+          <div class="bapi-timeline-dot-col"><div class="bapi-timeline-dot"></div><div class="bapi-timeline-line"></div></div>
+          <div class="bapi-timeline-body"><h4>BAPI is founded</h4><p>Established as the unified voice of Bangladesh's pharmaceutical manufacturers.</p></div>
+        </div>
+        <div class="bapi-timeline-item">
+          <div class="bapi-timeline-year">1982–2000s</div>
+          <div class="bapi-timeline-dot-col"><div class="bapi-timeline-dot"></div><div class="bapi-timeline-line"></div></div>
+          <div class="bapi-timeline-body"><h4>Local industry matures</h4><p>Drug policy reform and GMP adoption push local manufacturers to meet nearly all domestic demand.</p></div>
+        </div>
+        <div class="bapi-timeline-item">
+          <div class="bapi-timeline-year">2010s</div>
+          <div class="bapi-timeline-dot-col"><div class="bapi-timeline-dot"></div><div class="bapi-timeline-line"></div></div>
+          <div class="bapi-timeline-body"><h4>Export expansion</h4><p>Bangladeshi generics reach 150+ countries, including the USA, UK, Canada, Australia and the EU.</p></div>
+        </div>
+        <div class="bapi-timeline-item">
+          <div class="bapi-timeline-year">Today</div>
+          <div class="bapi-timeline-dot-col"><div class="bapi-timeline-dot"></div></div>
+          <div class="bapi-timeline-body"><h4>Building API Park</h4><p>A 200-acre industrial park is underway to localize Active Pharmaceutical Ingredient production.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GLOBAL FOOTPRINT (the fixed 3D background morphs into a globe here) ============ -->
+<section class="bapi-globe" id="bapi-globe">
+  <div class="bapi-container">
+    <div class="bapi-globe-inner bapi-reveal">
+      <span class="bapi-kicker">Bangladesh Pharma Industry</span>
+      <h2 class="bapi-h2" style="margin-bottom:18px;">An emerging generic drug hub, trusted across the globe</h2>
+      <p style="color:var(--bapi-muted);font-size:15.5px;line-height:1.75;">One of the most technologically advanced sectors in Bangladesh, producing complex, high-tech medicines — including insulin, hormones and anti-cancer therapies — while meeting 98% of local demand and exporting to markets across North America, Europe, Australia and beyond. Watch the export map take shape behind this section as you scroll.</p>
+      <div class="bapi-globe-stats">
+        <div class="bapi-stat-card"><div class="bapi-stat-num" data-count="1200" data-suffix="+">0</div><div class="bapi-stat-label">Products Registered for Export</div></div>
+        <div class="bapi-stat-card"><div class="bapi-stat-num" data-count="23" data-suffix="%">0</div><div class="bapi-stat-label">Avg. Annual Export Growth*</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPETITIVE EDGE ============ -->
+<section class="bapi-edge">
+  <div class="bapi-container">
+    <div class="bapi-section-head bapi-reveal">
+      <div><span class="bapi-kicker">Prospect &amp; Opportunities</span><h2 class="bapi-h2">The competitive edge of Bangladesh Pharma</h2></div>
+      <p class="bapi-section-desc">Cost, capability and compliance — the three pillars behind Bangladesh's rise as a trusted generics exporter.</p>
+    </div>
+    <div class="bapi-edge-grid">
+      <div class="bapi-edge-card bapi-tilt bapi-reveal">
+        <div class="bapi-edge-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h4>Cost advantage</h4><p>Labour costs 3–4x lower than India and China, keeping quality generics globally price-competitive.</p>
+      </div>
+      <div class="bapi-edge-card bapi-tilt bapi-reveal">
+        <div class="bapi-edge-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg></div>
+        <h4>TRIPS advantage</h4><p>LDC-status patent flexibilities let manufacturers produce patented generics ahead of global peers.</p>
+      </div>
+      <div class="bapi-edge-card bapi-tilt bapi-reveal">
+        <div class="bapi-edge-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></div>
+        <h4>Diverse dosage skill</h4><p>Deep experience across tablets, injectables, biosimilars and complex delivery systems.</p>
+      </div>
+      <div class="bapi-edge-card bapi-tilt bapi-reveal">
+        <div class="bapi-edge-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 6v6c0 5 4 8 9 10 5-2 9-5 9-10V6l-9-4Z"/></svg></div>
+        <h4>GMP &amp; global compliance</h4><p>Facilities certified to WHO, US FDA, UK MHRA and EU GMP standards across multiple manufacturers.</p>
+      </div>
+      <div class="bapi-edge-card bapi-tilt bapi-reveal">
+        <div class="bapi-edge-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 15l4-6 4 3 5-8"/></svg></div>
+        <h4>CMO-ready capacity</h4><p>Proven contract manufacturing experience, ready to scale for international partners.</p>
+      </div>
+      <div class="bapi-edge-card bapi-tilt bapi-reveal">
+        <div class="bapi-edge-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21c4-4 8-7.58 8-12A8 8 0 0 0 4 9c0 4.42 4 8 8 12Z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+        <h4>API Park ahead</h4><p>A dedicated 200-acre park will soon localize raw ingredient supply for the whole industry.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MANUFACTURING PHOTO BANNER ============ -->
+<section class="bapi-mfg">
+  <div class="bapi-container">
+    <div class="bapi-mfg-banner bapi-reveal">
+      <!-- PHOTO 2 — Wikimedia Commons, official NIH photography — public domain (U.S. federal government work). -->
+      <img decoding="async" id="bapiMfgImg" src="https://commons.wikimedia.org/wiki/Special:FilePath/Medical_Laboratory_Scientist_US_NIH.jpg" alt="Pharmaceutical manufacturing and quality control" loading="lazy">
+      <div class="bapi-mfg-content">
+        <span class="bapi-kicker">Manufacturing Excellence</span>
+        <h3>Built on global-standard quality systems</h3>
+        <p>BAPI member facilities operate under rigorous quality management — from raw material sourcing to finished dosage — meeting the standards required to serve regulated markets worldwide.</p>
+        <div class="bapi-mfg-badges">
+          <span class="bapi-mfg-badge">WHO GMP</span>
+          <span class="bapi-mfg-badge">US FDA</span>
+          <span class="bapi-mfg-badge">UK MHRA</span>
+          <span class="bapi-mfg-badge">EU GMP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ API PARK ============ -->
+<section class="bapi-park" id="bapi-park">
+  <div class="bapi-container">
+    <div class="bapi-park-panel bapi-reveal">
+      <div class="bapi-park-top">
+        <div>
+          <span class="bapi-kicker">API Park</span>
+          <h2 class="bapi-h2">Localizing Active Pharmaceutical Ingredients</h2>
+          <p>An environmentally suitable industrial park to produce Active Pharmaceutical Ingredients — reducing import dependency and strengthening Bangladesh's manufacturing sovereignty.</p>
+        </div>
+        <a href="#" class="bapi-btn bapi-btn-primary">Learn About API Park</a>
+      </div>
+      <div class="bapi-park-grid">
+        <div class="bapi-stat-card"><div class="bapi-stat-num" data-count="200" data-suffix=" ac">0</div><div class="bapi-stat-label">Total Land Area</div></div>
+        <div class="bapi-stat-card"><div class="bapi-stat-num" data-count="42" data-nosep="1">0</div><div class="bapi-stat-label">Manufacturing Plots</div></div>
+        <div class="bapi-stat-card"><div class="bapi-stat-num" data-count="30" data-prefix="$" data-suffix="M">0</div><div class="bapi-stat-label">Project Investment</div></div>
+        <div class="bapi-stat-card"><div class="bapi-stat-num" data-count="25000" data-suffix="+">0</div><div class="bapi-stat-label">Jobs to be Created</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEWS ============ -->
+<section class="bapi-news" id="bapi-news">
+  <div class="bapi-container">
+    <div class="bapi-section-head bapi-reveal">
+      <div><span class="bapi-kicker">Media</span><h2 class="bapi-h2">Latest from BAPI</h2></div>
+      <p class="bapi-section-desc">Events, milestones and announcements from across the industry.</p>
+    </div>
+    <div class="bapi-news-grid">
+      <article class="bapi-news-card bapi-reveal">
+        <div class="bapi-news-thumb"><span class="bapi-news-date">31 Mar 2026</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+        <div class="bapi-news-body"><h4>17th Asia Pharma Expo &amp; Asia Lab Expo 2026</h4><p>400+ companies from 20+ countries gathered at BCFEC Purbachal for the three-day flagship exhibition.</p><span class="bapi-news-link">Read more →</span></div>
+      </article>
+      <article class="bapi-news-card bapi-reveal">
+        <div class="bapi-news-thumb"><span class="bapi-news-date">30 Mar 2026</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="bapi-news-body"><h4>BAPI Holds 55th Annual General Meeting</h4><p>Presided over by President Mr. Abdul Muktadir, marking another year of industry progress.</p><span class="bapi-news-link">Read more →</span></div>
+      </article>
+      <article class="bapi-news-card bapi-reveal">
+        <div class="bapi-news-thumb"><span class="bapi-news-date">2026</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2 3 6v6c0 5 4 8 9 10 5-2 9-5 9-10V6l-9-4Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <div class="bapi-news-body"><h4>New Executive Committee Elected</h4><p>A fresh leadership team takes charge, continuing BAPI's mandate for the industry's growth.</p><span class="bapi-news-link">Read more →</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="bapi-marquee-wrap">
+  <div class="bapi-marquee-label">Trusted &amp; Recognised By</div>
+  <div class="bapi-marquee" id="bapiMarquee">
+    <div class="bapi-marquee-item">Directorate General of Drug Administration<span class="bapi-dot-sep"></span></div>
+    <div class="bapi-marquee-item">Ministry of Health &amp; Family Welfare<span class="bapi-dot-sep"></span></div>
+    <div class="bapi-marquee-item">IGBA — International Generic Medicines Association<span class="bapi-dot-sep"></span></div>
+    <div class="bapi-marquee-item">Bangladesh Export Promotion Bureau<span class="bapi-dot-sep"></span></div>
+    <div class="bapi-marquee-item">Board of Investment Bangladesh<span class="bapi-dot-sep"></span></div>
+    <div class="bapi-marquee-item">National Board of Revenue<span class="bapi-dot-sep"></span></div>
+  </div>
+</div>
+
+<!-- ============ CTA ============ -->
+<section class="bapi-cta">
+  <div class="bapi-container">
+    <div class="bapi-cta-panel bapi-reveal">
+      <span class="bapi-eyebrow" style="margin-bottom:20px;"><span class="dot"></span> Join the Industry</span>
+      <h2>Be part of Bangladesh's pharmaceutical growth story</h2>
+      <p>Whether you're a manufacturer, investor or partner — connect with BAPI to explore membership and industry opportunities.</p>
+      <div class="bapi-cta-actions">
+        <a href="#" class="bapi-btn bapi-btn-primary">Become a Member</a>
+        <a href="#" class="bapi-btn bapi-btn-ghost">Contact BAPI</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /.bapi-redesign -->
+</main>
+
+<!-- ============================================================
+  SITE FOOTER
+============================================================= -->
+<footer class="bapi-ftr-redesign" id="bapi-site-footer">
+
+<div class="bapi-ftr-glow" aria-hidden="true"></div>
+
+<div class="bapi-ftr-container">
+  <div class="bapi-ftr-main">
+    <div class="bapi-ftr-grid">
+
+      <!-- ============ BRAND ============ -->
+      <div class="bapi-ftr-col">
+        <div class="bapi-ftr-brand-row">
+          <img class="bapi-ftr-logo" id="bapiFtrLogo" src="https://saizul.com/bapi-sample-website/wp-content/uploads/2026/09/BAPI-logo.jpg" alt="BAPI logo">
+          <svg class="bapi-ftr-flag" id="bapiFtrFlagFallback" style="display:none" viewBox="0 0 30 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="30" height="18" fill="#006a4e"/>
+            <circle cx="13.5" cy="9" r="6" fill="#f42a41"/>
+          </svg>
+          <span class="bapi-ftr-brand-name">BAPI</span>
+        </div>
+        <p class="bapi-ftr-desc">The <b>Bangladesh Association of Pharmaceutical Industries</b> - the apex body of the nation's pharmaceutical sector since 1972, representing 154 member companies building a $3.2 billion industry trusted in 150+ countries.</p>
+        <div class="bapi-ftr-social-row">
+          <a class="bapi-ftr-social" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="BAPI on Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.51 17.52 2 12 2S2 6.51 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.78-1.63 1.58v1.9h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94Z"/></svg>
+          </a>
+          <a class="bapi-ftr-social" href="https://x.com/BAPI61703299" target="_blank" rel="noopener noreferrer" aria-label="BAPI on X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2.75h3.09l-6.75 7.72 7.94 10.78h-6.22l-4.87-6.37-5.57 6.37H2.77l7.22-8.25L2.4 2.75h6.38l4.4 5.82 5.06-5.82Zm-1.08 16.6h1.71L7.93 4.53H6.1l11.06 14.82Z"/></svg>
+          </a>
+          <a class="bapi-ftr-social" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="BAPI on LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- ============ QUICK LINKS ============ -->
+      <div class="bapi-ftr-col">
+        <h3 class="bapi-ftr-heading">Quick Links</h3>
+        <ul class="bapi-ftr-links">
+          <li><a href="https://saizul.com/bapi-sample-website/">Home</a></li>
+          <li><a href="https://saizul.com/bapi-sample-website/about-us/">About Us</a></li>
+          <li><a href="https://saizul.com/bapi-sample-website/bangladesh-pharma-industry/">Bangladesh Pharma Industry</a></li>
+          <li><a href="https://saizul.com/bapi-sample-website/bapi-leadership-governance/">Leadership &amp; Governance</a></li>
+          <li><a href="https://saizul.com/bapi-sample-website/members-directory/">Members Directory</a></li>
+          <li><a href="https://saizul.com/bapi-sample-website/contact/">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- ============ CONTACT ============ -->
+      <div class="bapi-ftr-col">
+        <h3 class="bapi-ftr-heading">Contact</h3>
+        <ul class="bapi-ftr-contact">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.14 7-12a7 7 0 1 0-14 0c0 5.86 7 12 7 12Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            <span>Navana Osman @ Link (Level-4), 214/D Bir Uttam Mir Shawkat Avenue, Tejgaon-Gulshan Link Road, Dhaka-1208, Bangladesh</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92Z"/></svg>
+            <span><a href="tel:+8829889731">+88-2-9889731</a></span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m22 6-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+            <span><a href="mailto:bdass@bol-online.com">bdass@bol-online.com</a></span>
+          </li>
+        </ul>
+        <div class="bapi-ftr-notice">
+          <b>N.B.</b> This is a sample redesign, not the official BAPI website. See the notice bar at the top of the page for details.
+        </div>
+      </div>
+
+      <!-- ============ AT A GLANCE ============ -->
+      <div class="bapi-ftr-col">
+        <h3 class="bapi-ftr-heading">BAPI At A Glance</h3>
+        <ul class="bapi-ftr-links" style="pointer-events:none;">
+          <li style="color:var(--ftr-muted);"><span style="display:inline-flex;align-items:center;gap:8px;"><b style="color:var(--ftr-text);">Est. 1972</b> &nbsp;-&nbsp; Serving 54 years</span></li>
+          <li style="color:var(--ftr-muted);"><span style="display:inline-flex;align-items:center;gap:8px;"><b style="color:var(--ftr-text);">154</b> &nbsp;Member Companies</span></li>
+          <li style="color:var(--ftr-muted);"><span style="display:inline-flex;align-items:center;gap:8px;"><b style="color:var(--ftr-text);">$3.2Bn</b> &nbsp;Industry Value</span></li>
+          <li style="color:var(--ftr-muted);"><span style="display:inline-flex;align-items:center;gap:8px;"><b style="color:var(--ftr-text);">150+</b> &nbsp;Export Countries</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bapi-ftr-bottom">
+    <div class="bapi-ftr-copy">&#169; <span id="bapiFtrYear">2026</span> Bangladesh Association of Pharmaceutical Industries. All rights reserved.</div>
+    <div class="bapi-ftr-credit">Design and Developed by <a href="https://saizul.com/" target="_blank" rel="noopener noreferrer">Saizul Amin</a></div>
+  </div>
+</div>
+
+</footer>
+
+<!-- ============ SCRIPTS ============ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<!-- header behaviour -->
+<script>
+(function(){
+  "use strict";
+  var root = document.getElementById('bapi-site-header');
+  if(!root) return;
+
+  /* logo image fallback */
+  var logoImg = document.getElementById('bapiHdrLogo');
+  var flagFallback = document.getElementById('bapiHdrFlagFallback');
+  if(logoImg){
+    logoImg.addEventListener('error', function(){
+      logoImg.style.display = 'none';
+      if(flagFallback) flagFallback.style.display = 'block';
+    });
+  }
+
+  /* push page content below the fixed header */
+  function syncBodyOffset(){
+    document.body.style.paddingTop = root.offsetHeight + 'px';
+  }
+  syncBodyOffset();
+  window.addEventListener('load', syncBodyOffset);
+  window.addEventListener('resize', syncBodyOffset);
+  setTimeout(syncBodyOffset, 600);
+
+  /* mobile menu toggle */
+  var navWrap = document.getElementById('bapiHdrNavWrap');
+  var toggleBtn = document.getElementById('bapiHdrToggle');
+  var scrim = document.getElementById('bapiHdrScrim');
+
+  function closeMenu(){
+    navWrap.classList.remove('open');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  function openMenu(){
+    navWrap.classList.add('open');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  if(toggleBtn){
+    toggleBtn.addEventListener('click', function(){
+      if(navWrap.classList.contains('open')) closeMenu(); else openMenu();
+    });
+  }
+  if(scrim){ scrim.addEventListener('click', closeMenu); }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeMenu();
+  });
+  root.querySelectorAll('.bapi-hdr-link').forEach(function(a){
+    a.addEventListener('click', closeMenu);
+  });
+  window.addEventListener('resize', function(){
+    if(window.innerWidth > 900) closeMenu();
+  });
+
+  /* highlight the current page's nav link */
+  function normalizePath(p){
+    if(!p) return '/';
+    p = p.split('?')[0].split('#')[0];
+    if(p.length > 1 && p.endsWith('/')) p = p.slice(0, -1);
+    return p || '/';
+  }
+  var currentPath = normalizePath(window.location.pathname);
+  root.querySelectorAll('.bapi-hdr-link').forEach(function(a){
+    try{
+      var linkPath = normalizePath(new URL(a.href, window.location.href).pathname);
+      if(linkPath === currentPath) a.classList.add('active');
+    }catch(e){ /* ignore malformed hrefs */ }
+  });
+})();
+</script>
+
+<!-- footer behaviour -->
+<script>
+(function(){
+  "use strict";
+  var root = document.getElementById('bapi-site-footer');
+  if(!root) return;
+
+  var logoImg = document.getElementById('bapiFtrLogo');
+  var flagFallback = document.getElementById('bapiFtrFlagFallback');
+  if(logoImg){
+    logoImg.addEventListener('error', function(){
+      logoImg.style.display = 'none';
+      if(flagFallback) flagFallback.style.display = 'block';
+    });
+  }
+
+  var yearEl = document.getElementById('bapiFtrYear');
+  if(yearEl){ yearEl.textContent = new Date().getFullYear(); }
+})();
+</script>
+
+<!-- home page: animations + 3D scene -->
+<script>
+(function(){
+  "use strict";
+  var root = document.getElementById('bapi-home');
+  if(!root) return;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- GSAP reveal + counters ---------- */
+  if(window.gsap){
+    gsap.registerPlugin(ScrollTrigger);
+
+    var heroTl = gsap.timeline({ defaults:{ ease:'power3.out' } });
+    heroTl.from(root.querySelector('.bapi-eyebrow'), { opacity:0, y:16, duration:.6 })
+      .from(root.querySelectorAll('.bapi-hero h1 .bapi-word-in'), {
+        opacity:0, rotationX:-110, y:'55%', transformOrigin:'50% 100%',
+        stagger:.07, duration:1, ease:'back.out(1.4)'
+      }, '-=.3')
+      .from(root.querySelector('.bapi-hero-sub'), { opacity:0, y:20, duration:.7 }, '-=.55')
+      .from(root.querySelector('.bapi-hero-actions'), { opacity:0, y:20, duration:.7 }, '-=.5')
+      .from(root.querySelector('.bapi-hero-meta'), { opacity:0, y:20, duration:.7 }, '-=.5');
+
+    ScrollTrigger.batch('.bapi-reveal', {
+      start:'top 88%',
+      once:true,
+      onEnter: function(batch){
+        gsap.to(batch, { opacity:1, y:0, rotationX:0, duration:1, ease:'power3.out', stagger:.12, overwrite:true });
+      }
+    });
+
+    root.querySelectorAll('.bapi-stat-num').forEach(function(el){
+      var target = parseFloat(el.getAttribute('data-count'));
+      var prefix = el.getAttribute('data-prefix') || '';
+      var suffix = el.getAttribute('data-suffix') || '';
+      var nosep = el.getAttribute('data-nosep');
+      var obj = { val: 0 };
+      ScrollTrigger.create({
+        trigger: el, start:'top 88%', once:true,
+        onEnter: function(){
+          gsap.to(obj, { val: target, duration: 1.8, ease:'power2.out',
+            onUpdate: function(){
+              var v = Math.floor(obj.val);
+              el.textContent = prefix + (nosep ? String(v) : v.toLocaleString('en-US')) + suffix;
+            }
+          });
+        }
+      });
+    });
+  }
+
+  /* ---------- photo fallbacks ---------- */
+  var photo1Img = document.getElementById('bapiPhoto1Img');
+  if(photo1Img){
+    photo1Img.addEventListener('error', function(){
+      if(photo1Img.parentElement) photo1Img.parentElement.style.background = 'linear-gradient(160deg,#123522,#0b1410)';
+      photo1Img.remove();
+    });
+  }
+  var mfgImg = document.getElementById('bapiMfgImg');
+  if(mfgImg){ mfgImg.addEventListener('error', function(){ mfgImg.remove(); }); }
+
+  /* ---------- 3D tilt cards ---------- */
+  if(!reduceMotion && window.matchMedia('(pointer:fine)').matches){
+    root.querySelectorAll('.bapi-tilt').forEach(function(card){
+      card.addEventListener('mousemove', function(e){
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - .5;
+        var py = (e.clientY - r.top) / r.height - .5;
+        card.style.transform = 'perspective(700px) rotateX(' + (py * -8) + 'deg) rotateY(' + (px * 10) + 'deg) translateY(-4px)';
+      });
+      card.addEventListener('mouseleave', function(){ card.style.transform = ''; });
+    });
+  }
+
+  /* =========================================================
+     THREE.JS — one persistent full-page background scene
+  ========================================================= */
+  var hasWebGL = (function(){
+    try{ var c=document.createElement('canvas'); return !!(window.WebGLRenderingContext && (c.getContext('webgl')||c.getContext('experimental-webgl'))); }
+    catch(e){ return false; }
+  })();
+
+  function initBgScene(){
+    var wrap = document.querySelector('.bapi-bg-fixed');
+    var canvas = document.getElementById('bapiBgCanvas');
+    if(!wrap || !canvas || !hasWebGL || !window.THREE) return;
+
+    var W = window.innerWidth, H = window.innerHeight;
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(45, W/H, 0.1, 100);
+    camera.position.set(0, 0, 9.5);
+
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias:true, alpha:true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.7));
+    renderer.setSize(W, H);
+
+    scene.add(new THREE.AmbientLight(0x203528, 1.1));
+    var key = new THREE.PointLight(0x28d16d, 3, 40); key.position.set(6,4,7); scene.add(key);
+    var rim = new THREE.PointLight(0xf9cf3b, 1.8, 40); rim.position.set(-7,-3,5); scene.add(rim);
+
+    /* ---- pill cluster (hero motif) ---- */
+    function makeCapsule(radius, length, color, emissiveI){
+      var g = new THREE.Group();
+      var mat = new THREE.MeshStandardMaterial({ color: color, metalness:.4, roughness:.25, emissive: color, emissiveIntensity: emissiveI||.16, transparent:true, opacity:1 });
+      var cyl = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, length, 32, 1, true), mat);
+      cyl.rotation.z = Math.PI/2; g.add(cyl);
+      var capA = new THREE.Mesh(new THREE.SphereGeometry(radius, 32, 16, 0, Math.PI*2, 0, Math.PI/2), mat);
+      capA.rotation.z = -Math.PI/2; capA.position.x = length/2; g.add(capA);
+      var capB = new THREE.Mesh(new THREE.SphereGeometry(radius, 32, 16, 0, Math.PI*2, 0, Math.PI/2), mat);
+      capB.rotation.z = Math.PI/2; capB.position.x = -length/2; g.add(capB);
+      g.userData.mat = mat;
+      return g;
+    }
+
+    var pillCluster = new THREE.Group();
+    scene.add(pillCluster);
+    var pill1 = makeCapsule(0.62, 2.1, 0x28d16d, .24); pill1.position.set(2.0, 0.7, 0); pill1.rotation.set(0.3, 0.6, 0.2); pillCluster.add(pill1);
+    var pill2 = makeCapsule(0.42, 1.5, 0xf9cf3b, .3); pill2.position.set(3.6, -0.4, -0.6); pill2.rotation.set(-0.4, 1.1, 0.5); pillCluster.add(pill2);
+    var pill3 = makeCapsule(0.3, 1.1, 0x38d9e0, .2); pill3.position.set(2.5, -1.5, 0.8); pill3.rotation.set(0.8, 0.2, -0.3); pillCluster.add(pill3);
+
+    var molGroup = new THREE.Group();
+    var nodeMat = new THREE.MeshStandardMaterial({ color:0x28d16d, emissive:0x28d16d, emissiveIntensity:.5, roughness:.3, transparent:true, opacity:1 });
+    var bondMat = new THREE.MeshStandardMaterial({ color:0x2c3a33, roughness:.6, transparent:true, opacity:1 });
+    var nodePositions = [[0,0,0],[1.1,0.6,0.3],[-0.9,0.7,-0.4],[0.3,-1,0.6],[-0.6,-0.8,-0.5]];
+    nodePositions.forEach(function(p){ var n = new THREE.Mesh(new THREE.SphereGeometry(0.12,16,16), nodeMat); n.position.set(p[0],p[1],p[2]); molGroup.add(n); });
+    for(var i=1;i<nodePositions.length;i++){
+      var a = new THREE.Vector3(nodePositions[0][0],nodePositions[0][1],nodePositions[0][2]);
+      var b = new THREE.Vector3(nodePositions[i][0],nodePositions[i][1],nodePositions[i][2]);
+      var dir = new THREE.Vector3().subVectors(b,a); var len = dir.length();
+      var cyl = new THREE.Mesh(new THREE.CylinderGeometry(0.025,0.025,len,8), bondMat);
+      cyl.position.copy(a).addScaledVector(dir,0.5);
+      cyl.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0), dir.clone().normalize());
+      molGroup.add(cyl);
+    }
+    molGroup.scale.setScalar(1.1); molGroup.position.set(0.4, -1.6, 1);
+    pillCluster.add(molGroup);
+
+    var pCount = 160;
+    var pGeo = new THREE.BufferGeometry();
+    var positions = new Float32Array(pCount*3);
+    for(var j=0;j<pCount;j++){ positions[j*3]=(Math.random()-0.5)*20; positions[j*3+1]=(Math.random()-0.5)*14; positions[j*3+2]=(Math.random()-0.5)*10-2; }
+    pGeo.setAttribute('position', new THREE.BufferAttribute(positions,3));
+    var pMat = new THREE.PointsMaterial({ color:0x6fe3a1, size:0.035, transparent:true, opacity:.5 });
+    var particles = new THREE.Points(pGeo, pMat);
+    scene.add(particles);
+
+    /* ---- globe (Global Footprint motif) ---- */
+    var globeGroup = new THREE.Group();
+    globeGroup.scale.setScalar(0.001);
+    scene.add(globeGroup);
+
+    var R = 2.3;
+    var core = new THREE.Mesh(new THREE.SphereGeometry(R*0.985, 48, 48), new THREE.MeshStandardMaterial({ color:0x123322, emissive:0x0f3320, emissiveIntensity:.55, roughness:.75, metalness:.15, transparent:true, opacity:1 }));
+    globeGroup.add(core);
+    var wire = new THREE.Mesh(new THREE.SphereGeometry(R, 28, 20), new THREE.MeshBasicMaterial({ color:0x28d16d, wireframe:true, transparent:true, opacity:.4 }));
+    globeGroup.add(wire);
+
+    var dotsGeo = new THREE.BufferGeometry();
+    var dotCount = 900, dPos = new Float32Array(dotCount*3), idx = 0;
+    while(idx < dotCount){
+      var u = Math.random(), v = Math.random(), theta = 2*Math.PI*u, phi = Math.acos(2*v-1);
+      if(Math.random() > 0.55){
+        dPos[idx*3]=R*1.01*Math.sin(phi)*Math.cos(theta); dPos[idx*3+1]=R*1.01*Math.cos(phi); dPos[idx*3+2]=R*1.01*Math.sin(phi)*Math.sin(theta); idx++;
+      }
+    }
+    dotsGeo.setAttribute('position', new THREE.BufferAttribute(dPos,3));
+    var dots = new THREE.Points(dotsGeo, new THREE.PointsMaterial({ color:0x7be8ab, size:0.028, transparent:true, opacity:.8 }));
+    globeGroup.add(dots);
+
+    function toVec(latDeg, lonDeg, radius){
+      var lat = latDeg*Math.PI/180, lon = lonDeg*Math.PI/180;
+      return new THREE.Vector3(radius*Math.cos(lat)*Math.cos(lon), radius*Math.sin(lat), radius*Math.cos(lat)*Math.sin(lon));
+    }
+    var dhaka = { lat:23.8, lon:90.4 };
+    var destinations = [ {lat:38.9,lon:-77.0}, {lat:51.5,lon:-0.1}, {lat:52.5,lon:13.4}, {lat:-33.9,lon:151.2}, {lat:45.4,lon:-75.7} ];
+    var originV = toVec(dhaka.lat, dhaka.lon, R*1.01);
+    var originPin = new THREE.Mesh(new THREE.SphereGeometry(0.05,12,12), new THREE.MeshBasicMaterial({ color:0xf9cf3b, transparent:true, opacity:1 }));
+    originPin.position.copy(originV); globeGroup.add(originPin);
+
+    var arcGroup = new THREE.Group(); globeGroup.add(arcGroup);
+    var travelDots = [];
+    destinations.forEach(function(d, i){
+      var destV = toVec(d.lat, d.lon, R*1.01);
+      var mid = originV.clone().add(destV).multiplyScalar(0.5); mid.setLength(R*1.55);
+      var curve = new THREE.QuadraticBezierCurve3(originV, mid, destV);
+      var tube = new THREE.Mesh(new THREE.TubeGeometry(curve, 40, 0.012, 6, false), new THREE.MeshBasicMaterial({ color:0x28d16d, transparent:true, opacity:.6 }));
+      arcGroup.add(tube);
+      var pin = new THREE.Mesh(new THREE.SphereGeometry(0.045,12,12), new THREE.MeshBasicMaterial({ color:0x28d16d, transparent:true, opacity:1 })); pin.position.copy(destV); arcGroup.add(pin);
+      var td = new THREE.Mesh(new THREE.SphereGeometry(0.032,10,10), new THREE.MeshBasicMaterial({ color:0xffffff, transparent:true, opacity:1 }));
+      td.userData = { curve:curve, offset: i*0.2 }; arcGroup.add(td); travelDots.push(td);
+    });
+    globeGroup.position.set(-2.3, 0.3, -1.5);
+
+    /* ---- mouse parallax ---- */
+    var mouseX = 0, mouseY = 0;
+    window.addEventListener('mousemove', function(e){
+      mouseX = (e.clientX / window.innerWidth - .5) * 2;
+      mouseY = (e.clientY / window.innerHeight - .5) * 2;
+    });
+
+    /* ---- scroll-driven choreography ---- */
+    var lerp = THREE.MathUtils.lerp;
+    var pillState = { scale:1, opacity:1, driftX:0 };
+    var globeState = { scale:0.001, opacity:0 };
+    var lightColor = { t:0 }; // 0=green,1=gold,2=cyan
+    var cGreen = new THREE.Color(0x28d16d), cGold = new THREE.Color(0xf9cf3b), cCyan = new THREE.Color(0x38d9e0);
+
+    if(window.ScrollTrigger){
+      ScrollTrigger.create({
+        trigger:'#bapi-hero', start:'top top', end:'bottom top', scrub:.6,
+        onUpdate:function(self){ pillState.scale = lerp(1,.5,self.progress); pillState.opacity = lerp(1,.32,self.progress); pillState.driftX = lerp(0,1.6,self.progress); }
+      });
+      ScrollTrigger.create({
+        trigger:'#bapi-globe', start:'top bottom', end:'center center', scrub:.6,
+        onUpdate:function(self){ globeState.scale = lerp(0.001,1,self.progress); globeState.opacity = self.progress; }
+      });
+      ScrollTrigger.create({
+        trigger:'#bapi-globe', start:'center center', end:'bottom top', scrub:.6,
+        onUpdate:function(self){ globeState.scale = lerp(1,.62,self.progress); globeState.opacity = lerp(1,.4,self.progress); pillState.opacity = lerp(.32,.12,self.progress); }
+      });
+      ScrollTrigger.create({
+        trigger: root, start:'top top', end:'bottom bottom', scrub:.6,
+        onUpdate:function(self){ lightColor.t = self.progress * 2; }
+      });
+    }
+
+    var clock = new THREE.Clock();
+    var running = true;
+    document.addEventListener('visibilitychange', function(){ running = !document.hidden; });
+
+    function animate(){
+      requestAnimationFrame(animate);
+      if(!running) return;
+      var t = clock.getElapsedTime();
+
+      pillCluster.scale.setScalar(pillState.scale);
+      pillCluster.position.x = pillState.driftX;
+      pillCluster.rotation.y = t*0.16 + mouseX*0.25;
+      pillCluster.rotation.x = Math.sin(t*0.3)*0.06 + mouseY*0.12;
+      [pill1,pill2,pill3].forEach(function(p){ if(p.userData.mat) p.userData.mat.opacity = pillState.opacity; });
+      nodeMat.opacity = pillState.opacity; bondMat.opacity = pillState.opacity;
+      pMat.opacity = Math.min(.5, pillState.opacity*.6);
+      pill1.rotation.z += 0.003; pill2.rotation.z -= 0.004; molGroup.rotation.y -= 0.006;
+
+      globeGroup.scale.setScalar(Math.max(0.001, globeState.scale));
+      globeGroup.rotation.y = t*0.12;
+      wire.material.opacity = .4*globeState.opacity;
+      dots.material.opacity = .8*globeState.opacity;
+      core.material.opacity = globeState.opacity;
+      originPin.material.opacity = globeState.opacity;
+      arcGroup.children.forEach(function(c){ if(c.material) c.material.opacity = (c.material.color.getHex()===0x28d16d ? .6 : 1) * globeState.opacity; });
+      travelDots.forEach(function(td){
+        var p = ((t*0.25 + td.userData.offset) % 1);
+        td.position.copy(td.userData.curve.getPoint(p));
+      });
+
+      var col;
+      if(lightColor.t <= 1){ col = cGreen.clone().lerp(cGold, lightColor.t); }
+      else { col = cGold.clone().lerp(cCyan, lightColor.t-1); }
+      key.color.copy(col);
+
+      particles.rotation.y = t*0.015;
+      camera.position.x += (mouseX*0.5 - camera.position.x)*0.02;
+      camera.lookAt(0,0,0);
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', function(){
+      var w = window.innerWidth, h = window.innerHeight;
+      camera.aspect = w/h; camera.updateProjectionMatrix();
+      renderer.setSize(w,h);
+      if(window.ScrollTrigger) ScrollTrigger.refresh();
+    });
+  }
+
+  function boot(){ initBgScene(); if(window.ScrollTrigger) setTimeout(function(){ ScrollTrigger.refresh(); }, 300); }
+  if(document.readyState === 'complete' || document.readyState === 'interactive'){ setTimeout(boot, 0); }
+  else { window.addEventListener('DOMContentLoaded', boot); }
+
+})();
+</script>
+</body>
+</html>
